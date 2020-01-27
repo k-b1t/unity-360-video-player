@@ -53,12 +53,14 @@ public class VideoPlayer360 : MonoBehaviour {
     void Update () {
         if (videoStopsWhenUserNotPresent && XRDevice.isPresent) {
             if (XRDevice.userPresence == UserPresenceState.Present && playerPresent == false) {
+                videoPlayer.targetTexture.Release ();
                 videoPlayer.Play ();
                 playerPresent = true;
-            }
 
+            }
             if (XRDevice.userPresence == UserPresenceState.NotPresent && playerPresent == true) {
                 videoPlayer.Stop ();
+                videoPlayer.targetTexture.Release ();
                 playerPresent = false;
             }
         }
